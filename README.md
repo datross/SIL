@@ -5,10 +5,6 @@ A Simple Interpreted Language, with its interpreter.
 
 > git clone https://github.com/datross/SIL 
 
-> cd SIL
-
-> mkdir bin
-
-> mk> > dir obj
+> cd SIL/src/
 
 > make
