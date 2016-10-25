@@ -29,3 +29,5 @@
 *.app
 
 *.html
+
+.kdev4
