@@ -6,7 +6,7 @@ Base types:
 - int
 - float
 - string
-- *Is this a good idea?* [] : a collection of ressources
+- *FACULTATIVE.* [] : a collection of ressources
 
 Expressions
 ===========
@@ -25,14 +25,6 @@ Expressions
 - '-'
 - '*' 
 - '/'
-
-# Access a variable
-
-| <variable_name>
-
-# Call a function
-
-| <function_name>(<expression>, <expression>, ...)
 
 Block
 =====
@@ -102,16 +94,13 @@ A function must return an expression (for the moment?)
 Declare a function (is it a program?)
 ==================
 
-~~~
-
 <type> <function_name>(<type> <arg1_name>, <type> <arg2_name>)
 {
 	<program>
 	<program>
 	...
 }
-
-~~~
+	
 
 Code example :
 ==============
@@ -157,21 +146,6 @@ int main(int argc, string[] argv)
 
 ~~~
 
-Abstract Syntax Tree
-====================
-
-A root of a tree has to be a function.
-Here are the different node types of a tree :
-
-# Function 
-
-_children:_
-
-- expression 1
-- ...
-- expression 2
-
-# 
 
 
     
