@@ -5,7 +5,7 @@ namespace sil {
 
 namespace vartype {
     enum variable_type {
-        INT, FLOAT, STRING
+        INT, FLOAT, STRING, NOTYPE
     };
 }
 
@@ -14,6 +14,7 @@ private:
     void* value;
     const vartype::variable_type type;
 public:
+	Variable();
     Variable(vartype::variable_type);
     Variable(const Variable&);
     ~Variable();

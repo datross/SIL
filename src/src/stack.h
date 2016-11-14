@@ -11,16 +11,16 @@ namespace sil {
 
 class Stack {
 private:
-    std::vector<std::map<std::string, Variable> > data;
+    std::vector< std::map<std::string, Variable> > data;
 public:
     Stack();
     ~Stack();
     void push();
     void pop();
     
-    const Variable& read_variable(std::string) const;
+    const Variable& read_variable(const std::__cxx11::string name) const;
     void write_variable(std::string, const Variable&);
-    void create_variable(std::string);
+    void create_variable(std::string, const Variable&);
 };
 
 }

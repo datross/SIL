@@ -5,12 +5,18 @@
 
 using namespace sil;
 
+Variable::Variable()
+	: value(NULL), type(vartype::NOTYPE)
+{
+}
+
+
 Variable::Variable(vartype::variable_type _type)
-    : type(_type) {
+    : value(NULL), type(_type) {
 }
 
 Variable::Variable(const Variable& source)
-    : type(source.type) {
+    : value(NULL), type(source.type) {
         
 }
 
