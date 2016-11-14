@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "variables.h"
+
 using namespace std;
 
 int main(int argc, char * argv[])
