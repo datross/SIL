@@ -10,12 +10,12 @@ all: $(OBJ)
 
 obj/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
-	
+
 -include $(DEP)
 
 clean:
 	rm obj/*
-	
+
 re: clean all
 
 
