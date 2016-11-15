@@ -19,6 +19,9 @@ Variable::Variable()
     : value(NULL), type(source.type) {    
 }*/
 
+Variable::Variable(const  vartype::variable_type _type) : type(_type) {
+}
+
 vartype::variable_type Variable::get_type() const {
     return type;
 }

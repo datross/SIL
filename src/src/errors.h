@@ -10,10 +10,7 @@ namespace error {
 	
 class undeclared_variable : public std::runtime_error {
 public:
-	undeclared_variable(const std::string name) : std::runtime_error(name) {}
-	virtual const char* what() {
-		return (std::string("SIL error: '") + std::string(what()) + std::string("' not declared.")).c_str();
-	}
+	undeclared_variable(const std::string name) : std::runtime_error(std::string("SIL error: '") + std::string(name) + std::string("' not declared.")) {}
 };
 
 }

@@ -4,6 +4,7 @@
 using namespace sil;
 
 Stack::Stack() {
+	push();
 }
 
 Stack::~Stack() {

@@ -9,8 +9,14 @@ class Int : public Variable {
 public:
 	Int();
 	Int(int);
-	Int(const Variable&);
 	virtual ~Int();
+	
+	void operator=(const Int&);
+	
+	/* debug */
+	int get_val() { return *(int*)value; }
 };
+
+}
 
 #endif
