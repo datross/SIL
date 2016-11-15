@@ -11,9 +11,9 @@ Base types:
 
 ## Operators (by decreasing priority order)
 
-- '||' 
-- '&&' 
-- '!=' 
+- '||'
+- '&&'
+- '!='
 - '=='
 - '>='
 - '<='

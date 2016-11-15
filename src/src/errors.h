@@ -1,21 +1,18 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-#include <exception>
+#include <stdexcept>
 #include <string>
 
 namespace sil {
 
 namespace error {
 	
-class undeclared_variable : public std::exception {
-	const std::string message;
-	//const char* message;
+class undeclared_variable : public std::runtime_error {
 public:
-	undeclared_variable(const std::string name) : message("SIL error: variable '" + name + "' undeclared.") {}
-	virtual ~undeclared_variable() throw() {}
-	const char* what() const throw() {
-		return message.c_str();
+	undeclared_variable(const std::string name) : std::runtime_error(name) {}
+	virtual const char* what() {
+		return (std::string("SIL error: '") + std::string(what()) + std::string("' not declared.")).c_str();
 	}
 };
 
