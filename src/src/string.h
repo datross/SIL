@@ -11,6 +11,11 @@ public:
 	String();
 	String(std::string);
 	virtual ~String();
+
+	void operator=(const String&);
+
+	/* debug */
+	std::string get_val() { return *(std::string*)value; }
 };
 
 }

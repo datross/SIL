@@ -1,0 +1,20 @@
+#include "string.h"
+
+using namespace sil;
+using namespace std;
+
+String::String() : Variable(vartype::STRING) {
+	value = new string("");
+}
+
+String::String(string v) : Variable(vartype::STRING) {
+	value = new string(v);
+}
+
+String::~String() {
+	delete (string*)value;
+}
+
+void String::operator=(const String& var) {
+	*(string*)value = *(string*)var.value;
+}
