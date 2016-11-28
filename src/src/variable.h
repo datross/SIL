@@ -13,14 +13,13 @@ class Variable {
 protected:
     void* value;
     const vartype::variable_type type;
+    Variable(const vartype::variable_type);
 public:
 	Variable();
     //Variable(vartype::variable_type);
     //Variable(const Variable&);
     virtual ~Variable() {};
     vartype::variable_type get_type() const;
-protected:
-	Variable(const vartype::variable_type);
 };
 
 }
