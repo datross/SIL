@@ -12,7 +12,7 @@ void Expression_node::execute() {
 
 }
 
-Variable & Expression_node::get_return_value() {
+Variable_ptr Expression_node::get_return_value() {
 	return return_value;
 }
 
@@ -31,5 +31,5 @@ Return_node::Return_node(Function & _function, Expression_node & _child)
 
 void Return_node::execute() {
 	child.execute();
-	//function.return_value = child.get_return_value();
+	function.return_value = child.get_return_value();
 }

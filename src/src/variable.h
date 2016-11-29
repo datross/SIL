@@ -1,6 +1,8 @@
 #ifndef VARIABLE_H
 #define VARIABLE_H
 
+#include <memory>
+
 namespace sil {
 
 namespace vartype {
@@ -21,6 +23,8 @@ public:
     virtual ~Variable() {};
     vartype::variable_type get_type() const;
 };
+
+typedef std::shared_ptr<Variable> Variable_ptr;
 
 }
 

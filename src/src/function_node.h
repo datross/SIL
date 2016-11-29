@@ -10,11 +10,11 @@ namespace function {
 
 class Expression_node {
 private:
-	Variable return_value;
+	Variable_ptr return_value;
 public:
 	Expression_node();
 	virtual void execute();
-	Variable & get_return_value();
+	Variable_ptr get_return_value();
 };
 
 class Statement_node {
