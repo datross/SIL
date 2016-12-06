@@ -9,7 +9,7 @@ namespace sil {
 namespace function {
 
 class Expression_node {
-private:
+protected:
 	Variable_ptr return_value;
 public:
 	Expression_node();
@@ -33,6 +33,12 @@ private:
 public:
 	Return_node(Function & _function, Expression_node & _child);
 	virtual void execute();
+};
+
+class Int_node : public Expression_node {
+public:
+	Int_node();
+	void set_value(int value);
 };
 
 }

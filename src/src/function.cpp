@@ -11,9 +11,9 @@ Function::Function(std::string _name,
 	  parameters(_parameters) {
 }
 
-/*void Function::set_root(std::shared_pointer<Statement_node> _root) {
+void Function::set_root(Statement_ptr _root) {
 	root = std::move(_root);
-}*/
+}
 
 void Function::execute() {
 	root->execute();

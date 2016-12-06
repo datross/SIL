@@ -1,6 +1,8 @@
 #include "function_node.h"
 #include "function.h"
 
+#include "int.h"
+
 using namespace sil;
 using namespace function;
 
@@ -32,4 +34,11 @@ Return_node::Return_node(Function & _function, Expression_node & _child)
 void Return_node::execute() {
 	child.execute();
 	function.return_value = child.get_return_value();
+}
+
+Int_node::Int_node(){
+}
+
+void Int_node::set_value(int value){
+	return_value = Variable_ptr(new Int(value));
 }

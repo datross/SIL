@@ -36,7 +36,7 @@ public:
 	Function(std::string _name,
 			 vartype::variable_type _return_type, 
 			 std::vector<Function_parameter> _parameters);
-	//void set_root(std::shared_ptr<Statement_node> _root);
+	void set_root(Statement_ptr _root);
 	void execute();
 	Variable_ptr get_return_value();
 };
