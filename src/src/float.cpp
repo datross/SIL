@@ -19,3 +19,9 @@ Float::~Float() {
 void Float::operator=(const Float& var) {
 	*(float*)value = *(float*)var.value;
 }
+
+Float * Float::clone(){
+	Float * copy = new Float();
+	*copy = *this;
+	return copy;
+}

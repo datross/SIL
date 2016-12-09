@@ -10,6 +10,9 @@ Variable::Variable()
 {
 }
 
+Variable * Variable::clone(){
+
+}
 
 /*Variable::Variable(vartype::variable_type _type)
     : value(NULL), type(_type) {

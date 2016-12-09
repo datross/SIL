@@ -12,6 +12,7 @@ public:
 	virtual ~Float();
 	
 	void operator=(const Float&);
+	virtual Float * clone();
 	
 	/* debug */
 	float get_val() { return *(float*)value; }

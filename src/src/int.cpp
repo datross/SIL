@@ -19,3 +19,9 @@ Int::~Int() {
 void Int::operator=(const Int& var) {
 	*(int*)value = *(int*)var.value;
 }
+
+Int * Int::clone(){
+	Int * copy = new Int();
+	*copy = *this;
+	return copy;
+}

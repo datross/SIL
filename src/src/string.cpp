@@ -18,3 +18,9 @@ String::~String() {
 void String::operator=(const String& var) {
 	*(string*)value = *(string*)var.value;
 }
+
+String * String::clone(){
+	String * copy = new String();
+	*copy = *this;
+	return copy;
+}

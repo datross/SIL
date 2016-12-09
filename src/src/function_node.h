@@ -4,6 +4,8 @@
 #include "tree_declarations.h"
 #include "variable.h"
 
+#include <vector>
+
 namespace sil {
 
 namespace function {
@@ -17,12 +19,38 @@ public:
 	Variable_ptr get_return_value();
 };
 
+/* ------------------------------------------------------------------------- */
+
 class Statement_node {
 private:
 public:
 	Statement_node();
 	virtual void execute();
 };
+
+/* ------------------------------------------------------------------------- */
+
+
+//!\ Gérer les paramètres (avec le stack)
+class Call_node : public Statement_node, Expression_node {
+private:
+	Function& function;
+public:
+	Call_node(Function& _function);
+	virtual void execute();
+};
+
+/* ------------------------------------------------------------------------- */
+
+class Block_node : public Statement_node {
+private:
+	std::vector<Statement_ptr> children;
+public:
+	Block_node(std::vector<Statement_ptr> children);
+	virtual void execute();
+};
+
+/* ------------------------------------------------------------------------- */
 
 class Return_node : public Statement_node {
 private:
@@ -34,6 +62,8 @@ public:
 	Return_node(Function & _function, Expression_node & _child);
 	virtual void execute();
 };
+
+/* ------------------------------------------------------------------------- */
 
 class Int_node : public Expression_node {
 public:

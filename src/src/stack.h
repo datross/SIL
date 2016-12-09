@@ -9,12 +9,18 @@
 
 namespace sil {
 
+
+//!\ finir singleton !
 class Stack {
 private:
     std::vector< std::map<std::string, Variable> > data;
-public:
     Stack();
+
+    Stack(Stack const&);
+    void operator=(Stack const&);
+public:
     ~Stack();
+
     void push();
     void pop();
     
