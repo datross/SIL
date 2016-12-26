@@ -4,7 +4,7 @@ using namespace sil;
 
 Float::Float() : Variable(vartype::FLOAT) {
 	value = new Float;
-	*(float*)value = 0;
+	*(float*)value = 0.;
 }
 
 Float::Float(float v) : Variable(vartype::FLOAT) {
@@ -14,6 +14,10 @@ Float::Float(float v) : Variable(vartype::FLOAT) {
 
 Float::~Float() {
 	delete (float*)value;
+}
+
+Float Float::make() {
+    return Float();
 }
 
 void Float::operator=(const Float& var) {

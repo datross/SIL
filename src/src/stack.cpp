@@ -10,6 +10,11 @@ Stack::Stack() {
 Stack::~Stack() {
 }
 
+Stack& Stack::get_instance() {
+    static Stack singleton_instance;
+    return singleton_instance;
+}
+
 void Stack::push() {
     std::map<std::string, Variable> scope;
     data.push_back(scope);
@@ -35,7 +40,7 @@ Variable& Stack::operator[](const std::string name) {
 	}
 }
 
-void Stack::create_variable(std::string name, const Variable& value) {
-	std::pair<std::map<std::string, Variable>::iterator, bool> element = data[data.size() - 1].insert(std::make_pair(name, value));
+void Stack::create_variable(std::string name, Variable_ptr value) {
+	std::pair<std::map<std::string, Variable>::iterator, bool> element = data[data.size() - 1].insert(std::make_pair(name, *value));
 	/* eventual debugging info given to user, if variable already exists (element.second == true) */
 }

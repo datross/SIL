@@ -11,6 +11,8 @@ public:
 	String();
 	String(std::string);
 	virtual ~String();
+        
+        static String make();
 
 	void operator=(const String&);
 	virtual String * clone();

@@ -15,6 +15,10 @@ String::~String() {
 	delete (string*)value;
 }
 
+String String::make() {
+    return String();
+}
+
 void String::operator=(const String& var) {
 	*(string*)value = *(string*)var.value;
 }

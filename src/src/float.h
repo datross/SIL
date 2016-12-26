@@ -10,6 +10,8 @@ public:
 	Float();
 	Float(float);
 	virtual ~Float();
+        
+        static Float make();
 	
 	void operator=(const Float&);
 	virtual Float * clone();

@@ -10,6 +10,8 @@ public:
 	Int();
 	Int(int);
 	virtual ~Int();
+        
+        static Int make();
 	
 	void operator=(const Int&);
 	virtual Int * clone();

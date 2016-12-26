@@ -16,6 +16,10 @@ Int::~Int() {
 	delete (int*)value;
 }
 
+Int Int::make() {
+    return Int();
+}
+
 void Int::operator=(const Int& var) {
 	*(int*)value = *(int*)var.value;
 }

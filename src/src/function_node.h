@@ -1,10 +1,11 @@
 #ifndef FUNCTION_NODE_H
 #define FUNCTION_NODE_H
 
-#include "tree_declarations.h"
+#include "tree_utilities.h"
 #include "variable.h"
 
 #include <vector>
+#include <string>
 
 namespace sil {
 
@@ -30,13 +31,13 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
-
-//!\ Gérer les paramètres (avec le stack)
 class Call_node : public Statement_node, Expression_node {
 private:
 	Function& function;
+        std::vector<Expression_ptr> children;
 public:
 	Call_node(Function& _function);
+        void set_children(std::vector<Expression_ptr>);
 	virtual void execute();
 };
 
@@ -69,6 +70,34 @@ class Int_node : public Expression_node {
 public:
 	Int_node();
 	void set_value(int value);
+};
+
+/* ------------------------------------------------------------------------- */
+
+class Float_node : public Expression_node {
+public:
+	Float_node();
+	void set_value(float value);
+};
+
+/* ------------------------------------------------------------------------- */
+
+class String_node : public Expression_node {
+public:
+	String_node();
+	void set_value(std::string value);
+};
+
+/* ------------------------------------------------------------------------- */
+
+/* This node read a variable from the stack */
+class Read_node : public Expression_node {
+private:
+    std::string variable_identifier;
+public:
+    Read_node(std::string);
+    
+    virtual void execute();
 };
 
 }

@@ -4,13 +4,13 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <memory>
 
 #include "variable.h"
+#include "stack.h"
 
 namespace sil {
 
-
-//!\ finir singleton !
 class Stack {
 private:
     std::vector< std::map<std::string, Variable> > data;
@@ -19,13 +19,16 @@ private:
     Stack(Stack const&);
     void operator=(Stack const&);
 public:
+    /* singleton instance getter */
+    static Stack& get_instance();
+    
     ~Stack();
 
     void push();
     void pop();
     
     Variable& operator[](const std::string);
-    void create_variable(std::string, const Variable&);
+    void create_variable(std::string, Variable_ptr);
 };
 
 }

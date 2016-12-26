@@ -16,6 +16,14 @@ typedef std::shared_ptr<Statement_node>  Statement_ptr;
 typedef std::shared_ptr<Expression_node> Expression_ptr;
 
 }
+
+// /* Function which creates a variable with specified type */
+// #include "variable.h"
+// #include "int.h"
+// #include "float.h"
+// #include "string.h"
+// Variable make_variable(vartype::variable_type);
+    
 }
 
 #endif
