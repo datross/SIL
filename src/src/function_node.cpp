@@ -53,6 +53,7 @@ void Call_node::execute() {
         auto it_children = children.begin();
         for(; it_children != children.end() && it_params != function.get_parameters().end(); ++it_children, ++it_params) {
             (*it_children)->execute();
+            std::cout << it_params->name << std::endl;
             sil::Stack::get_instance().create_variable(it_params->name, (*it_children)->get_return_value());
         }
         
