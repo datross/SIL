@@ -34,7 +34,7 @@ void Statement_node::execute() {
 
 /* ------------------------------------------------------------------------- */
 
-Call_node::Call_node(Function& _function)
+Call_node::Call_node(Function_ptr _function)
 	: function(_function)
 {
 }
@@ -49,22 +49,21 @@ void Call_node::execute() {
         
         /* Allocate each parameter on the stack.
            Iterating is done on children, although we assume that there are as many children as parameters. */
-        auto it_params   = function.get_parameters().begin();
+        auto it_params   = function->get_parameters().begin();
         auto it_children = children.begin();
-        for(; it_children != children.end() && it_params != function.get_parameters().end(); ++it_children, ++it_params) {
+        for(; it_children != children.end() && it_params != function->get_parameters().end(); ++it_children, ++it_params) {
             (*it_children)->execute();
-            std::cout << it_params->name << std::endl;
             sil::Stack::get_instance().create_variable(it_params->name, (*it_children)->get_return_value());
         }
         
         /* function can be executed now. */
-	function.execute();
+	function->execute();
         
         /* function has been executed, scope can be popped. */
         sil::Stack::get_instance().pop();
         
 	/* copy the variable, so the function can be called after without changing the return value. */
-	return_value = Variable_ptr(function.get_return_value()->clone());
+	return_value = Variable_ptr(function->get_return_value()->clone());
 }
 
 /* ------------------------------------------------------------------------- */
@@ -127,7 +126,7 @@ Read_node::Read_node(std::string _variable_identifier)
 }
 
 void Read_node::execute() {
-    return_value = std::shared_ptr<Variable>(Stack::get_instance()[variable_identifier].clone());
+    return_value = Variable_ptr(Stack::get_instance()[variable_identifier]->clone());
 }
 
 /* ------------------------------------------------------------------------- */
@@ -163,5 +162,5 @@ void Write_node::set_child(Expression_ptr _child) {
 
 void Write_node::execute() {
     child->execute();
-    sil::Stack::get_instance()[name] = *(child->get_return_value());
+    sil::Stack::get_instance()[name] = child->get_return_value();
 }

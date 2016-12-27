@@ -7,13 +7,14 @@
 #include <memory>
 
 #include "variable.h"
+#include "tree_utilities.h"
 #include "stack.h"
 
 namespace sil {
 
 class Stack {
 private:
-    std::vector< std::map<std::string, Variable> > data;
+    std::vector< std::map<std::string, Variable_ptr> > data;
     Stack();
 
     Stack(Stack const&);
@@ -27,7 +28,7 @@ public:
     void push();
     void pop();
     
-    Variable& operator[](const std::string);
+    Variable_ptr& operator[](const std::string);
     void create_variable(std::string, Variable_ptr);
 };
 

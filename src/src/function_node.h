@@ -35,10 +35,10 @@ public:
 
 class Call_node : public Statement_node, Expression_node {
 private:
-	Function& function;
+	Function_ptr function;
         std::vector<Expression_ptr> children;
 public:
-	Call_node(Function& _function);
+	Call_node(Function_ptr);
         void set_children(std::vector<Expression_ptr>);
 	virtual void execute();
 };

@@ -47,17 +47,27 @@ int main(int argc, char * argv[])
         // noeud de retour de la fonction
 	auto return_node = pool.add<Return_node>(function, return_value);
         
+        // noeud d'allocation de la variable
+        auto alloc_variable = pool.add<Allocate_node>(vartype::STRING, "chaine");
+        
         // noeud de la chaine à afficher
-	auto print_value = pool.add<String_node>();
-        print_value->set_value("Hello world!\n");
+	auto chaine = pool.add<String_node>();
+        chaine->set_value("Hello world!\n");
+        
+        // noeud d'écriture de la variable
+        auto write_variable = pool.add<Write_node>("chaine");
+        write_variable->set_child(chaine);
+        
+        // noeud de lecture de la variable_identifier
+        auto read_variable = pool.add<Read_node>("chaine");
         
         // noeud de call de 'print'
-        auto print_call = pool.add<Call_node>(*(sil::sil_std::Stdlib_functions::print));
-        std::vector<Expression_ptr> print_parameters = { print_value };
+        auto print_call = pool.add<Call_node>(sil::sil_std::Stdlib_functions::print);
+        std::vector<Expression_ptr> print_parameters = { read_variable };
         print_call->set_children(print_parameters);
         
         // noeud de block de la fonction 'main'
-        std::vector<Statement_ptr> block_children = { print_call, return_node };
+        std::vector<Statement_ptr> block_children = { alloc_variable, write_variable, print_call, return_node };
         auto block_node = pool.add<Block_node>(block_children);
         
         // on assigne le noeud de retour à la fonction
