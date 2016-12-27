@@ -21,6 +21,7 @@ namespace sil{
   
   class Parser {
   public :
+    
     Parser();
     
     //Reads a file and converse it into a json object
@@ -28,7 +29,8 @@ namespace sil{
     
     std::shared_ptr<sil::function::Float_node> parse_float(json);
   
-    //public :
+  private :
+    sil::function::Node_pool pool;
   
   };
 

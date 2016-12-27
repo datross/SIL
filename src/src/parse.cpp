@@ -19,7 +19,7 @@ using namespace std;
 
 using json = nlohmann::json;
 
-Node_pool pool;
+
 
 Parser::Parser() {}
 
@@ -36,7 +36,6 @@ json Parser::file_to_json(string name_file) {
 	string_file += line;
       }
       file.close();
-      cout << string_file<<endl;
       
       return json::parse(string_file);
     }
@@ -46,7 +45,11 @@ json Parser::file_to_json(string name_file) {
 
 std::shared_ptr<Float_node> Parser::parse_float(json j){
   auto float_node_return = pool.add<Float_node>();
-  float_node_return->set_value(j["float"]);
+  std::cout <<((float) j["float"]) * 2 <<std::endl;
+  
+  float_node_return->set_value( (float) j["float"] );
+  std::cout <<"bjs"<<std::endl;
+  
   return float_node_return;
   
 }

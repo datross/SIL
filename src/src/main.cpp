@@ -18,7 +18,6 @@ using json = nlohmann::json;
 
 int main(int argc, char * argv[])
 {
-        json j;
     
 // 	sil::Stack& stack = sil::Stack::get_instance();
 // 
@@ -68,10 +67,13 @@ int main(int argc, char * argv[])
 	//function->execute();
 
 	Parser parse_test;
-	parse_test.file_to_json("test.json");
+	json j = parse_test.file_to_json("test.json");
+	std::shared_ptr<Float_node> blub = parse_test.parse_float(j);
+	
+	std::cout<< std::dynamic_pointer_cast<Float>(blub->get_return_value())->get_val() << std::endl;
 
         // affiche la valeur de retour de la fonction 'main'
-// 	cout << "Retour de la fonction 'main' : " << ((sil::Int*)function->get_return_value().get())->get_val() << endl;
+// 	cout << "Retour de la fonction 'main' : " << ((sil::Int*)function->get_return_value().get())->get_al() << endl;
 
     return 0;
 }
