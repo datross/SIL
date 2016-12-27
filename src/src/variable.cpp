@@ -25,8 +25,8 @@ Variable::Variable(const Variable& source)
 }
 
 Variable& Variable::operator =(const Variable& source) {
-//     value = NULL;
-//     type = source.type;
+    value = NULL;
+    //type = source.type;
     return *this;
 }
 
