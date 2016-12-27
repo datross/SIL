@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -MMD -std=c++11 -fdiagnostics-color
+CXXFLAGS = -Wall -MMD -std=c++11 -fdiagnostics-color -Ithird_parties/
 SRC = $(wildcard src/*.cpp)
 HEADERS = $(wildcard src/*.h)
 OBJ = $(SRC:src/%.cpp=obj/%.o)

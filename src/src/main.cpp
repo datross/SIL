@@ -8,11 +8,17 @@
 #include "stdlib_functions.h"
 #include "node_pool.h"
 
+#include "json.hpp"
+
 using namespace sil;
 using namespace function;
 
+using json = nlohmann::json;
+
 int main(int argc, char * argv[])
 {
+        json j;
+    
 // 	sil::Stack& stack = sil::Stack::get_instance();
 // 
 // 	stack.push();
