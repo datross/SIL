@@ -14,6 +14,7 @@ class Return_node;
 
 typedef std::shared_ptr<Statement_node>  Statement_ptr;
 typedef std::shared_ptr<Expression_node> Expression_ptr;
+typedef std::shared_ptr<Function> Function_ptr;
 
 }
 

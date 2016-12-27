@@ -63,7 +63,7 @@ void Call_node::execute() {
         sil::Stack::get_instance().pop();
         
 	/* copy the variable, so the function can be called after without changing the return value. */
-	return_value = Variable_ptr(function.get_return_value().get()->clone());
+	return_value = Variable_ptr(function.get_return_value()->clone());
 }
 
 /* ------------------------------------------------------------------------- */
@@ -82,14 +82,14 @@ void Block_node::execute() {
 
 /* ------------------------------------------------------------------------- */
 
-Return_node::Return_node(Function & _function, Expression_node & _child) 
+Return_node::Return_node(Function_ptr _function, Expression_ptr _child) 
 	: function(_function), child(_child) {
 
 }
 
 void Return_node::execute() {
-	child.execute();
-	function.return_value = child.get_return_value();
+	child->execute();
+	function->return_value = child->get_return_value();
 }
 
 /* ------------------------------------------------------------------------- */

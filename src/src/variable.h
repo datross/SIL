@@ -22,8 +22,8 @@ protected:
 public:
         Variable();
     virtual Variable * clone();
-    //Variable(vartype::variable_type);
-    //Variable(const Variable&);
+//     Variable(vartype::variable_type);
+//     Variable(const Variable&);
     virtual ~Variable() {};
     vartype::variable_type get_type() const;
 };

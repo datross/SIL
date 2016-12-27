@@ -1,6 +1,6 @@
 #include "variable.h"
 #include <cstdlib>
-
+#include <iostream>
 #include <string>
 
 using namespace sil;
@@ -14,13 +14,13 @@ Variable * Variable::clone(){
 
 }
 
-/*Variable::Variable(vartype::variable_type _type)
-    : value(NULL), type(_type) {
-}*/
+// Variable::Variable(vartype::variable_type _type)
+//     : value(NULL), type(_type) {
+// }
 
-/*Variable::Variable(const Variable& source)
-    : value(NULL), type(source.type) {    
-}*/
+// Variable::Variable(const Variable& source)
+//     : value(NULL), type(source.type) {
+// }
 
 Variable::Variable(const  vartype::variable_type _type) : type(_type) {
 }

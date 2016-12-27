@@ -46,8 +46,6 @@ public:
 	Variable_ptr get_return_value();
 };
 
-typedef std::shared_ptr<Function> Function_ptr;
-
 }
 }
 

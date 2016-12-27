@@ -3,9 +3,11 @@
 
 #include "tree_utilities.h"
 #include "variable.h"
+#include "function.h"
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 namespace sil {
 
@@ -55,12 +57,12 @@ public:
 
 class Return_node : public Statement_node {
 private:
-	Function & function;
+	Function_ptr function;
 
 	/* children */
-	Expression_node & child;
+	Expression_ptr child;
 public:
-	Return_node(Function & _function, Expression_node & _child);
+	Return_node(Function_ptr _function, Expression_ptr _child);
 	virtual void execute();
 };
 

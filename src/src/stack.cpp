@@ -40,6 +40,7 @@ Variable& Stack::operator[](const std::string name) {
 	}
 }
 
+#include <iostream>
 void Stack::create_variable(std::string name, Variable_ptr value) {
 	std::pair<std::map<std::string, Variable>::iterator, bool> element = data[data.size() - 1].insert(std::make_pair(name, *value));
 	/* eventual debugging info given to user, if variable already exists (element.second == true) */

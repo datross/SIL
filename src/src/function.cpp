@@ -22,16 +22,15 @@ void Function::set_root(Statement_ptr _root) {
 	root = std::move(_root);
 }
 
-#include <iostream>
-
 const std::vector<Function_parameter>& Function::get_parameters() const {
     return parameters;
 }
 
 void Function::execute() {
-	root->execute();
+    root->execute();
 }
-
+#include <iostream>
 Variable_ptr Function::get_return_value() {
-	return return_value;
+//     std::cout << return_value << std::endl;
+    return return_value;
 }
