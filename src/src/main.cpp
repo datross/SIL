@@ -17,7 +17,6 @@ using json = nlohmann::json;
 
 int main(int argc, char * argv[])
 {
-        json j;
     
 // 	sil::Stack& stack = sil::Stack::get_instance();
 // 
@@ -35,7 +34,7 @@ int main(int argc, char * argv[])
 // 	} catch(const std::exception & e) {
 // 		cout << e.what() << std::endl;
 // 	}
-
+        
         Node_pool pool;
 
         //on créé la fonction

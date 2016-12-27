@@ -1,14 +1,16 @@
 #include "float.h"
 
+#include <iostream>
+
 using namespace sil;
 
 Float::Float() : Variable(vartype::FLOAT) {
-	value = new Float;
+	value = new float;
 	*(float*)value = 0.;
 }
 
 Float::Float(float v) : Variable(vartype::FLOAT) {
-	value = new Float;
+	value = new float;
 	*(float*)value = v;
 }
 
