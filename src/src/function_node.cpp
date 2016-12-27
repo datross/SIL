@@ -128,3 +128,39 @@ Read_node::Read_node(std::string _variable_identifier)
 void Read_node::execute() {
     return_value = std::shared_ptr<Variable>(Stack::get_instance()[variable_identifier].clone());
 }
+
+/* ------------------------------------------------------------------------- */
+
+Allocate_node::Allocate_node(vartype::variable_type _type, std::string _name)
+    : type(_type), name(_name) {
+}
+
+void Allocate_node::execute() {
+    Variable_ptr tmp;
+    if(type == vartype::INT) {
+        tmp = Variable_ptr(new Int());
+    } else if(type == vartype::FLOAT) {
+        tmp = Variable_ptr(new Float());
+    } else if(type == vartype::STRING) {
+        tmp = Variable_ptr(new String());
+    } else {
+        // TODO !
+    }
+        
+    sil::Stack::get_instance().create_variable(name, tmp);
+}
+
+/* ------------------------------------------------------------------------- */
+
+Write_node::Write_node(std::string _name)
+    : name(_name) {
+}
+
+void Write_node::set_child(Expression_ptr _child) {
+    child = _child;
+}
+
+void Write_node::execute() {
+    child->execute();
+    sil::Stack::get_instance()[name] = *(child->get_return_value());
+}

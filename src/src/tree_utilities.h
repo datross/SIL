@@ -18,7 +18,7 @@ typedef std::shared_ptr<Function> Function_ptr;
 
 }
 
-// /* Function which creates a variable with specified type */
+// // /* Function which creates a variable with specified type */
 // #include "variable.h"
 // #include "int.h"
 // #include "float.h"

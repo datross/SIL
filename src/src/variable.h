@@ -23,7 +23,9 @@ public:
         Variable();
     virtual Variable * clone();
 //     Variable(vartype::variable_type);
-//     Variable(const Variable&);
+    Variable(const Variable&);
+    Variable& operator =(const Variable&);
+    
     virtual ~Variable() {};
     vartype::variable_type get_type() const;
 };

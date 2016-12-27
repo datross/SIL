@@ -102,6 +102,33 @@ public:
     virtual void execute();
 };
 
+/* ------------------------------------------------------------------------- */
+
+/* This node creates a variable in the stack */
+class Allocate_node : public Statement_node {
+private:
+    vartype::variable_type type;
+    std::string name;
+public:
+    Allocate_node(vartype::variable_type, std::string);
+    virtual void execute();
+};
+
+/* ------------------------------------------------------------------------- */
+
+/* This node writes a variable from the stack (it does not create it) */
+class Write_node : public Statement_node {
+private:
+    std::string name;
+    Expression_ptr child;
+public:
+    Write_node(std::string);
+    
+    void set_child(Expression_ptr);
+    
+    virtual void execute();    
+};
+
 }
 }
 
