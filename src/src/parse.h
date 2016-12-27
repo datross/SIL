@@ -26,10 +26,18 @@ namespace sil{
     
     //Reads a file and converse it into a json object
     json file_to_json(std::string);
-    
+
     std::shared_ptr<sil::function::Float_node> parse_float(json);
-  
+    std::shared_ptr<sil::function::Int_node> parse_int(json);
+    std::shared_ptr<sil::function::String_node> parse_string(json);
+    std::shared_ptr<sil::function::Read_node> parse_read(json);
+    std::shared_ptr<sil::function::Allocate_node> parse_allocate(json);
+    std::shared_ptr<sil::function::Expression_node> parse_expression(json);
+    std::shared_ptr<sil::function::Write_node> parse_write(json);
+    
   private :
+    //transforme une chaîne du type "int" en type
+    vartype::variable_type string_to_type(std::string);
     sil::function::Node_pool pool;
   
   };
