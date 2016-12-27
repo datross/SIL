@@ -6,6 +6,7 @@ OBJ = $(SRC:src/%.cpp=obj/%.o)
 DEP = $(OBJ:%.o=%.d)
 
 all: $(OBJ)
+	@mkdir -p bin
 	$(CXX) $^ -o bin/sil
 
 obj/%.o: src/%.cpp
