@@ -9,6 +9,7 @@
 #include "function_node.h"
 #include "stdlib_functions.h"
 #include "node_pool.h"
+#include "function_pool.h"
 #include "parse.h"
 
 #include "json.hpp"
@@ -45,6 +46,7 @@ json Parser::file_to_json(string name_file) {
 
 
 
+/******************** Expression parsing ************************/
 std::shared_ptr<Float_node> Parser::parse_float(json j){
   auto float_node_return = pool.add<Float_node>();
   float_node_return->set_value( (float) j["float"] );  
@@ -67,6 +69,26 @@ std::shared_ptr<Read_node> Parser::parse_read(json j){
   return pool.add<Read_node>(j["read"].get<string>());
 }
 
+std::shared_ptr<Expression_node> Parser::parse_expression(json j){
+  if(j["int"])
+    return this->parse_int(j);
+  else if(j["string"])
+    return this->parse_string(j);
+  else if(j["int"])
+    return this->parse_int(j);
+  else if(j["read"])
+    return this->parse_read(j);
+  else
+    cerr << "parser error : this is not the name of an expression"<< endl;
+      
+}
+
+
+
+
+
+/**************** Statement parsing **********************/
+
 std::shared_ptr<Allocate_node> Parser::parse_allocate(json j){
   
   return pool.add<Allocate_node>(
@@ -82,21 +104,30 @@ std::shared_ptr<Write_node> Parser::parse_write(json j){
 }
 
 
-std::shared_ptr<Expression_node> Parser::parse_expression(json j){
-  if(j["int"])
-    this->parse_int(j);
-  else if(j["string"])
-    this->parse_string(j);
-  else if(j["int"])
-    this->parse_int(j);
-  else if(j["read"])
-    this->parse_read(j);
-  else if(j["allocate"])
-    this->parse_allocate(j);
+std::shared_ptr<Block_node> Parser::parse_block(json j){
+  vector<Statement_ptr> children = {};
+  for (json::iterator it = j.begin(); it != j.end(); ++it) {
+    children.push_back(parse_statement(*it));
+  }
+  return pool.add<Block_node>(children);
+}
+
+
+std::shared_ptr<Return_node> Parser::parse_return(json j){
+  //  return pool.add<Return_node>(parse_expression(j["return"]));
+}
+
+std::shared_ptr<Statement_node> Parser::parse_statement(json j){
+  if(j["allocate"])
+    return this->parse_allocate(j);
   else if(j["write"])
-    this->parse_write(j);
+    return this->parse_write(j);
+  else if(j["block"])
+    return this->parse_block(j);
+  else if(j["return"])
+    return this->parse_return(j);
   else
-    cerr << "parser error : this is not the name of an expression"<< endl;
+    cerr << "parser error : this is not the name of a statement"<< endl;
       
 }
 

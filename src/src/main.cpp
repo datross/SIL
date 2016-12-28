@@ -81,7 +81,7 @@ int main(int argc, char * argv[])
 
 	std::shared_ptr<Allocate_node> blub = parse_test.parse_allocate(j);
 	
-	std::cout<< blub->type << " " << blub->name << std::endl;
+	//std::cout<< blub->type << " " << blub->name << std::endl;
 
         // affiche la valeur de retour de la fonction 'main'
 // 	cout << "Retour de la fonction 'main' : " << ((sil::Int*)function->get_return_value().get())->get_al() << endl;
