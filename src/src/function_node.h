@@ -138,7 +138,9 @@ public:
 /* type of the operation computed with the children. */
 enum binary_operation_type {
     ADDITION,
-    MULTIPLICATION
+    MULTIPLICATION,
+    GREATER,
+    EQUAL
 };
 
 class Binary_math_node : public Expression_node {

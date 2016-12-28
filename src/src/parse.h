@@ -27,6 +27,7 @@ private :
     std::shared_ptr<sil::function::Int_node> parse_int(json);
     std::shared_ptr<sil::function::String_node> parse_string(json);
     std::shared_ptr<sil::function::Read_node> parse_read(json);
+    std::shared_ptr<sil::function::Binary_math_node> parse_binary(json);
     std::shared_ptr<sil::function::Expression_node> parse_expression(json);
     
     std::shared_ptr<sil::function::Write_node> parse_write(json);
@@ -41,10 +42,13 @@ private :
     sil::function::Function_parameter parse_parameter (json);
     sil::function::Function_ptr parse_function(json);
     
-    //transforms a string looking like "int" to parstype::type
+    /* transforms a string looking like "int" to parstype::type */
     vartype::variable_type string_to_type(std::string);
     
-    //Reads a file and converse it into a json object
+    /* transforms a string looking like ">" to binary_operation_type */
+    sil::function::binary_operation_type string_to_binary_type(std::string);
+    
+    /* Reads a file and converse it into a json object */
     json file_to_json(std::string);
     
     sil::function::Node_pool pool;

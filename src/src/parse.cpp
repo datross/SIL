@@ -25,6 +25,8 @@ Parser::Parser()
     : function_pool(new Function_pool()) {
     /* On ajout la librairie standard dans les fonctions. */
     function_pool->add(sil_std::Stdlib_functions::print);
+    function_pool->add(sil_std::Stdlib_functions::input);
+    function_pool->add(sil_std::Stdlib_functions::random);
 }
 
 json Parser::file_to_json(string name_file) {
@@ -73,7 +75,18 @@ std::shared_ptr<String_node> Parser::parse_string(json j) {
 
 std::shared_ptr<Read_node> Parser::parse_read(json j) {
     log_stream << "read : " << j["read"].get<string>() << std::endl;
+    
     return pool.add<Read_node>(j["read"].get<string>());
+}
+
+std::shared_ptr<Binary_math_node> Parser::parse_binary(json j) {
+    log_stream << "binary : " << j["binary"].get<string>() << std::endl;
+    
+    auto binary = pool.add<Binary_math_node>(string_to_binary_type(j["binary"].get<string>()));
+    binary->set_left_child(parse_expression(j["left"]));
+    binary->set_right_child(parse_expression(j["right"]));
+    
+    return binary;
 }
 
 std::shared_ptr<Expression_node> Parser::parse_expression(json j) {
@@ -89,6 +102,8 @@ std::shared_ptr<Expression_node> Parser::parse_expression(json j) {
         return parse_read(j);
     else if(j.find("call") != j.end())
         return parse_call(j);
+    else if(j.find("binary") != j.end())
+        return parse_binary(j);
     else
         cerr << "parser error : this is not the name of an expression"<< endl;
     
@@ -148,7 +163,7 @@ std::shared_ptr<While_node> Parser::parse_while(json j) {
     log_stream << "while" << std::endl;
     
     auto while_node = pool.add<While_node>();
-    while_node->set_condition_child(parse_expression(j["cond"]));
+    while_node->set_condition_child(parse_expression(j["while"]));
     while_node->set_loop_child(parse_statement(j["loop"]));
     
     return while_node;
@@ -158,7 +173,7 @@ std::shared_ptr<If_else_node> Parser::parse_if_else(json j) {
     log_stream << "if/else" << std::endl;
     
     auto if_else_node = pool.add<If_else_node>();
-    if_else_node->set_condition_child(parse_expression(j["cond"]));
+    if_else_node->set_condition_child(parse_expression(j["if"]));
     if_else_node->set_statement_if(parse_statement(j["then"]));
     if(j.find("else") != j.end())
         if_else_node->set_statement_else(parse_statement(j["else"]));
@@ -179,6 +194,10 @@ std::shared_ptr<Statement_node> Parser::parse_statement(json j) {
         return parse_return(j);
     else if(j.find("call") != j.end())
         return parse_call(j);
+    else if(j.find("while") != j.end())
+        return parse_while(j);
+    else if(j.find("if") != j.end())
+        return parse_if_else(j);
     else
         cerr << "parser error : this is not the name of a statement"<< endl;    
 }
@@ -238,3 +257,15 @@ vartype::variable_type Parser::string_to_type(string s) {
         cerr<< "Parser error : the type " << s << " does not exist." <<endl;
 }
 
+binary_operation_type Parser::string_to_binary_type(string s) {
+    if(s == "+") 
+        return ADDITION;
+    else if(s == "*")
+        return MULTIPLICATION;
+    else if(s == ">")
+        return GREATER;
+    else if(s == "==")
+        return EQUAL;
+    else
+        cerr<< "Parser error : the binary operation " << s << " does not exist." <<endl;
+}

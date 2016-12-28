@@ -269,6 +269,49 @@ void Binary_math_node::execute() {
             );
         }
     }
+    else if(type == GREATER) {
+        /* String - whatever */
+        if(left_child->get_return_value()->get_type()  == vartype::STRING || 
+           right_child->get_return_value()->get_type() == vartype::STRING) {
+            // TODO throw exception
+        }
+        
+        /* Float - Int ou Float - Float ou Int - Int */
+        else {
+            return_value = Variable_ptr( new Int(
+                    left_child->get_return_value()->to_Float()->get_val() >
+                    right_child->get_return_value()->to_Float()->get_val()
+            ));
+        }
+    }
+    else if(type == EQUAL) {
+        /* String - whatever */
+        if(left_child->get_return_value()->get_type()  == vartype::STRING || 
+           right_child->get_return_value()->get_type() == vartype::STRING) {
+            return_value = Variable_ptr( new Int(
+                left_child->get_return_value()->to_String()->get_val() ==
+                right_child->get_return_value()->to_String()->get_val()
+            ));
+        }
+        
+        /* Int - Int */
+        else if(left_child->get_return_value()->get_type()  == vartype::INT && 
+                right_child->get_return_value()->get_type() == vartype::INT) {
+            return_value = Variable_ptr(new Int(
+                    left_child->get_return_value()->to_Int()->get_val() == 
+                    right_child->get_return_value()->to_Int()->get_val()
+            ));
+        }
+        
+        /* Float - Int ou Float - Float */
+        else if(left_child->get_return_value()->get_type()  == vartype::FLOAT || 
+                right_child->get_return_value()->get_type() == vartype::FLOAT) {
+            return_value = Variable_ptr(new Int(
+                    left_child->get_return_value()->to_Float()->get_val() ==
+                    right_child->get_return_value()->to_Float()->get_val()
+            ));
+        }
+    }
 }
 
 /* ------------------------------------------------------------------------- */
@@ -288,7 +331,7 @@ void While_node::execute() {
     while(true) {
         condition->execute();
         
-        if(condition->get_return_value()->to_Int()->get_val() != 0)
+        if(condition->get_return_value()->to_Int()->get_val() == 0)
             break;
         
         loop->execute();

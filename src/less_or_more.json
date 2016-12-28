@@ -1,0 +1,114 @@
+[
+{
+    "function" : "inputNumber",
+    "type" : "int",
+    "parameters" : [],
+    "statement" : { 
+        "block" : [ 
+            {
+                "call":"print", 
+                "args" : [
+                    {"string":"Your guess?\n"}
+                ]
+            },
+            {
+                "return": {
+                    "call":"input", 
+                    "args": [
+                        {"string":"int"}
+                    ]
+                }
+            } 
+        ] 
+    }
+},
+{
+    "function" : "main", 
+    "type" : "int", 
+    "parameters" : [],
+    "statement" : {
+        "block" : [
+            { 
+                "call" : "print",
+                "args" : [
+                    { "string" : "Less or more game!\n" }
+                ]
+            },
+            {
+                "allocate" : { "name" : "number", "type" : "int" }
+            },
+            {
+                "allocate" : { "name" : "choice", "type" : "int" }
+            },
+            {
+                "write" : "number",
+                "expr" : {
+                        "call" : "random",
+                        "args" : [
+                            {"string" : "int"},
+                            {"int" : 0 },
+                            {"int" : 100 }
+                        ]
+                    }
+            },
+            {
+                "write" : "choice",
+                "expr" : {
+                        "call" : "inputNumber",
+                        "args" : []
+                }
+            },
+            {
+                "while" : {
+                    "binary":"==",
+                    "left": {
+                        "binary":"==",
+                        "left": { "read":"choice"},
+                        "right": { "read":"number"}
+                    },
+                    "right": { "int" : 0}
+                },
+                "loop" : {
+                    "block": [
+                        {
+                            "if": {
+                                "binary":">",
+                                "left": { "read":"number"},
+                                "right": { "read":"choice"}
+                            },
+                            "then":{
+                                    "call" : "print",
+                                    "args" : [
+                                        { "string" : "It's more!\n" }
+                                    ]
+                            },
+                            "else":{
+                                    "call" : "print",
+                                    "args" : [
+                                        { "string" : "It's less!\n" }
+                                    ]
+                            }
+                        },
+                        {
+                            "write" : "choice",
+                            "expr" : {
+                                    "call" : "inputNumber",
+                                    "args" : []
+                            }
+                        }
+                    ]
+                }
+            },
+            { 
+                "call" : "print",
+                "args" : [
+                    { "string" : "Bravo!\n" }
+                ]
+            },
+            {
+                "return": { "int" : 0 }
+            }
+        ]
+    }
+}
+]
