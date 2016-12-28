@@ -11,6 +11,10 @@ String::String(string v) : Variable(vartype::STRING) {
 	value = new string(v);
 }
 
+String::String(const String& source) : Variable(vartype::STRING) {
+    *this = source;
+}
+
 String::~String() {
 	delete (string*)value;
 }

@@ -36,3 +36,7 @@ Variable::Variable(const  vartype::variable_type _type) : type(_type) {
 vartype::variable_type Variable::get_type() const {
     return type;
 }
+
+const void * Variable::get() const {
+    return value;
+}

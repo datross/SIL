@@ -16,6 +16,16 @@ Int::~Int() {
 	delete (int*)value;
 }
 
+std::shared_ptr<Int> Int::to_Int() const {
+    return std::shared_ptr<Int>(new Int(*(int*)value));
+}
+std::shared_ptr<Float> Int::to_Float() const {
+    return std::shared_ptr<Float>(new Float((float)(*(int*)value)));
+}
+std::shared_ptr<String> Int::to_String() const {
+    return std::shared_ptr<String>(new String(/* TODO */));
+}
+
 Int Int::make() {
     return Int();
 }

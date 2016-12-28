@@ -14,7 +14,6 @@ private:
     std::map<std::string, Function_ptr> functions;
 public:
     Function_pool();
-//     ~Function_pool();
     
     /* Create a function with given parameters, and a 
        shared_ptr on it. */

@@ -2,6 +2,8 @@
 #define VAR_INT_H
 
 #include "variable.h"
+#include "float.h"
+#include "string.h"
 
 namespace sil {
 	
@@ -10,6 +12,11 @@ public:
 	Int();
 	Int(int);
 	virtual ~Int();
+        
+        /* cast function */
+    virtual std::shared_ptr<Int> to_Int() const;
+    virtual std::shared_ptr<Float> to_Float() const;
+    virtual std::shared_ptr<String> to_String() const;
         
         static Int make();
 	

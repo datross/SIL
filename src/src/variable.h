@@ -14,20 +14,31 @@ namespace vartype {
     };
 }
 
+class Variable;
+class Int;
+class Float;
+class String;
+
 class Variable {
 protected:
     void* value;
     const vartype::variable_type type;
     Variable(const vartype::variable_type);
 public:
-        Variable();
+    Variable();
     virtual Variable * clone();
 //     Variable(vartype::variable_type);
     Variable(const Variable&);
     Variable& operator =(const Variable&);
     
+    /* cast function */
+    virtual std::shared_ptr<Int> to_Int()       const { return NULL; }
+    virtual std::shared_ptr<Float> to_Float()   const { return NULL; }
+    virtual std::shared_ptr<String> to_String() const { return NULL; }
+    
     virtual ~Variable() {};
     vartype::variable_type get_type() const;
+    const void * get() const;
 };
 
 typedef std::shared_ptr<Variable> Variable_ptr;

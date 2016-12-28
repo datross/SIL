@@ -129,6 +129,29 @@ public:
     virtual void execute();    
 };
 
+/* ------------------------------------------------------------------------- */
+
+/* Classic math operations */
+
+/* type of the operation computed with the children. */
+enum binary_operation_type {
+    ADDITION,
+    MULTIPLICATION
+};
+
+class Binary_math_node : public Expression_node {
+private:
+    binary_operation_type type;
+    Expression_ptr left_child, right_child;
+public:
+    Binary_math_node(binary_operation_type);
+    Binary_math_node();
+    void set_left_child(Expression_ptr);
+    void set_right_child(Expression_ptr);
+    
+    virtual void execute();
+};
+
 }
 }
 

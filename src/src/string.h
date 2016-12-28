@@ -10,6 +10,7 @@ class String : public Variable {
 public:
 	String();
 	String(std::string);
+        String(const String&);
 	virtual ~String();
         
         static String make();

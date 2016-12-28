@@ -2,6 +2,7 @@
 #define VAR_FLOAT_H
 
 #include "variable.h"
+// #include "int.h"
 
 namespace sil {
 	
