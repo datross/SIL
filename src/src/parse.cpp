@@ -119,7 +119,7 @@ std::shared_ptr<Return_node> Parser::parse_return(json j){
 
 
 std::shared_ptr<Call_node> Parser::parse_call(json j){
-  auto call_ret = pool.add<Call_node>(function_pool.get(j["name"].get<string>()));
+  auto call_ret = pool.add<Call_node>(function_pool.get(j["call"].get<string>()));
   vector<Expression_ptr> children = {};
   for (json::iterator it = j["args"].begin(); it != j["args"].end(); ++it) {
     children.push_back(parse_expression(*it));
@@ -137,6 +137,8 @@ std::shared_ptr<Statement_node> Parser::parse_statement(json j){
   else if(j["block"])
     return this->parse_block(j);
   else if(j["return"])
+    return this->parse_return(j);
+  else if(j["call"])
     return this->parse_return(j);
   else
     cerr << "parser error : this is not the name of a statement"<< endl;
