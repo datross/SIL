@@ -7,6 +7,7 @@
 #include "function_node.h"
 #include "stdlib_functions.h"
 #include "node_pool.h"
+#include "parse.h"
 
 #include "json.hpp"
 
@@ -73,10 +74,17 @@ int main(int argc, char * argv[])
         // on assigne le noeud de retour à la fonction
 	function->set_root(block_node);
 
-	function->execute();
+	//function->execute();
+
+	Parser parse_test;
+	//json j = parse_test.file_to_json("test.json");
+
+	//std::shared_ptr<Allocate_node> blub = parse_test.parse_allocate(j);
+	
+	//std::cout<< blub->type << " " << blub->name << std::endl;
 
         // affiche la valeur de retour de la fonction 'main'
-// 	cout << "Retour de la fonction 'main' : " << ((sil::Int*)function->get_return_value().get())->get_val() << endl;
+// 	cout << "Retour de la fonction 'main' : " << ((sil::Int*)function->get_return_value().get())->get_al() << endl;
 
     return 0;
 }

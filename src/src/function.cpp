@@ -34,3 +34,7 @@ Variable_ptr Function::get_return_value() {
 //     std::cout << return_value << std::endl;
     return return_value;
 }
+
+std::string Function:: get_name() const{
+  return name;
+}

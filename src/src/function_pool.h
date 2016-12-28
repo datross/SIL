@@ -12,6 +12,7 @@ namespace function {
 class Function_pool {
 private:
     std::map<std::string, Function_ptr> functions;
+    Function_ptr last;
 public:
     Function_pool();
     
@@ -20,9 +21,15 @@ public:
     Function_ptr add(std::string name, 
                      vartype::variable_type return_type, 
                      std::vector<Function_parameter> parameters);
+
+    /* Adds a function to the pool */
+    void add(Function_ptr);
     
     /* Returns a shared_ptr on the function with the given name. */
     Function_ptr get(std::string name);
+    
+    /* Returns  shared_ptr on the last function added to the pool (NULL if no function has been added yet). */
+    Function_ptr get_last() const;
 };
 
 }
