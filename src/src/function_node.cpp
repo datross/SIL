@@ -184,65 +184,90 @@ void Binary_math_node::set_right_child(Expression_ptr child) {
 
 /* Utility local functions */
 
-template<class major, class minor>
-major add_variables(Variable& a, Variable& b) {
-    return major( *(minor*)a.get() + *(minor*)a.get() );
+template<class Major, class Minor>
+Major add_variables(Variable& a, Variable& b) {
+    return Major( (*(Minor*)a.get()) + (*(Minor*)a.get()) );
 }
 
-template<class major, class minor>
-major multiply_variables(Variable& a, Variable& b) {
-    return major( (*(minor*)a.get()) * (*(minor*)a.get()) );
+template<class Major, class Minor>
+Major multiply_variables(Variable& a, Variable& b) {
+    return Major( (*(Minor*)a.get()) * (*(Minor*)a.get()) );
 }
 
 void Binary_math_node::execute() {
     left_child->execute();
     right_child->execute();
     
-//     if(type == ADDITION) {
-//         /* String - whatever */
-//         if(left_child->get_return_value()->get_type()  == vartype::STRING || 
-//            right_child->get_return_value()->get_type() == vartype::STRING) {
-//             /* String - String */
-//             if(left_child->get_return_value()->get_type()  == vartype::STRING && 
-//                right_child->get_return_value()->get_type() == vartype::STRING) {
-//                 return_value = Variable_ptr( add_variables<String, std::string>(*(left_child->get_return_value()), *(right_child->get_return_value())).clone() );
-//             } 
-//             /* String - other */
-//             else {
-//                 // TODO throw exception
-//             }
-//         }
-//         
-//         /* Int - Int */
-//         else if(left_child->get_return_value()->get_type()  == vartype::INT && 
-//                 right_child->get_return_value()->get_type() == vartype::INT) {
-//             return_value = Variable_ptr( add_variables<Int, int>(*(left_child->get_return_value()), *(right_child->get_return_value())).clone() );
-//         }
-//         
-//         /* Float - Int ou Float - Float */
-//         else if(left_child->get_return_value()->get_type()  == vartype::FLOAT || 
-//                 right_child->get_return_value()->get_type() == vartype::FLOAT) {
-//             return_value = Variable_ptr( add_variables<Float, float>(Float(*(left_child->get_return_value())), Float(*(right_child->get_return_value()))).clone() );
-//         }
-//     } 
-//     else if(type == MULTIPLICATION) {
-//         /* String - whatever */
-//         if(left_child->get_return_value()->get_type()  == vartype::STRING || 
-//            right_child->get_return_value()->get_type() == vartype::STRING) {
-//             // TODO throw exception
-//         }
-//         
-//         /* Int - Int */
-//         else if(left_child->get_return_value()->get_type()  == vartype::INT && 
-//                 right_child->get_return_value()->get_type() == vartype::INT) {
-//             return_value = Variable_ptr( multiply_variables<Int, int>(*(left_child->get_return_value()), *(right_child->get_return_value())).clone() );
-//         }
-//         
-//         /* Float - Int ou Float - Float */
-//         else if(left_child->get_return_value()->get_type()  == vartype::FLOAT || 
-//                 right_child->get_return_value()->get_type() == vartype::FLOAT) {
-//             return_value = Variable_ptr( multiply_variables<Float, float>(Float(*(left_child->get_return_value())), Float(*(right_child->get_return_value()))).clone() );
-//         }
-//     }
+    if(type == ADDITION) {
+        /* String - whatever */
+        if(left_child->get_return_value()->get_type()  == vartype::STRING || 
+           right_child->get_return_value()->get_type() == vartype::STRING) {
+            /* String - String */
+            if(left_child->get_return_value()->get_type()  == vartype::STRING && 
+               right_child->get_return_value()->get_type() == vartype::STRING) {
+                return_value = Variable_ptr( 
+                    add_variables<String, std::string>(
+                        *(left_child->get_return_value()->to_String()), 
+                        *(right_child->get_return_value()->to_String())
+                    ).clone() 
+                );
+            } 
+            /* String - other */
+            else {
+                // TODO throw exception
+            }
+        }
+        
+        /* Int - Int */
+        else if(left_child->get_return_value()->get_type()  == vartype::INT && 
+                right_child->get_return_value()->get_type() == vartype::INT) {
+            return_value = Variable_ptr( 
+                add_variables<Int, int>(
+                    *(left_child->get_return_value()->to_Int()), 
+                    *(right_child->get_return_value()->to_Int())
+                ).clone()
+            );
+        }
+        
+        /* Float - Int ou Float - Float */
+        else if(left_child->get_return_value()->get_type()  == vartype::FLOAT || 
+                right_child->get_return_value()->get_type() == vartype::FLOAT) {
+            return_value = Variable_ptr( 
+                add_variables<Float, float>(
+                    *(left_child->get_return_value()->to_Float()), 
+                    *(right_child->get_return_value()->to_Float())
+                ).clone() 
+            );
+        }
+    } 
+    else if(type == MULTIPLICATION) {
+        /* String - whatever */
+        if(left_child->get_return_value()->get_type()  == vartype::STRING || 
+           right_child->get_return_value()->get_type() == vartype::STRING) {
+            // TODO throw exception
+        }
+        
+        /* Int - Int */
+        else if(left_child->get_return_value()->get_type()  == vartype::INT && 
+                right_child->get_return_value()->get_type() == vartype::INT) {
+            return_value = Variable_ptr( 
+                multiply_variables<Int, int>(
+                    *(left_child->get_return_value()->to_Int()), 
+                    *(right_child->get_return_value()->to_Int())
+                ).clone() 
+            );
+        }
+        
+        /* Float - Int ou Float - Float */
+        else if(left_child->get_return_value()->get_type()  == vartype::FLOAT || 
+                right_child->get_return_value()->get_type() == vartype::FLOAT) {
+            return_value = Variable_ptr( 
+                multiply_variables<Float, float>(
+                    *(left_child->get_return_value()->to_Float()), 
+                    *(right_child->get_return_value()->to_Float())
+                ).clone() 
+            );
+        }
+    }
 }
 
