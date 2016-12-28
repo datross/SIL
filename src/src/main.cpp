@@ -77,9 +77,9 @@ int main(int argc, char * argv[])
 	//function->execute();
 
 	Parser parse_test;
-	json j = parse_test.file_to_json("test.json");
+	//json j = parse_test.file_to_json("test.json");
 
-	std::shared_ptr<Allocate_node> blub = parse_test.parse_allocate(j);
+	//std::shared_ptr<Allocate_node> blub = parse_test.parse_allocate(j);
 	
 	//std::cout<< blub->type << " " << blub->name << std::endl;
 

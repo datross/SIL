@@ -1,3 +1,1 @@
-{
-    "allocate": {"type":"int","name" : "blub"}
-}
+{"write" : "x", "expr" : {"int" : 3}}

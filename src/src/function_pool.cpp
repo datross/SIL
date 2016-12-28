@@ -14,6 +14,10 @@ Function_ptr Function_pool::add(std::string name,
         return functions[name];
 }
 
+void Function_pool::add(Function_ptr function) {
+  functions[function->get_name()] = function;
+}
+
 Function_ptr Function_pool::get(std::string name) {
     return functions[name];
 }

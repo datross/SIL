@@ -114,12 +114,12 @@ std::shared_ptr<Block_node> Parser::parse_block(json j){
 
 
 std::shared_ptr<Return_node> Parser::parse_return(json j){
-  return pool.add<Return_node>(function_pool.get_last(),parse_expression(j["return"]));
+  return pool.add<Return_node>(function_pool->get_last(),parse_expression(j["return"]));
 }
 
 
 std::shared_ptr<Call_node> Parser::parse_call(json j){
-  auto call_ret = pool.add<Call_node>(function_pool.get(j["call"].get<string>()));
+  auto call_ret = pool.add<Call_node>(function_pool->get(j["call"].get<string>()));
   vector<Expression_ptr> children = {};
   for (json::iterator it = j["args"].begin(); it != j["args"].end(); ++it) {
     children.push_back(parse_expression(*it));
@@ -146,6 +146,38 @@ std::shared_ptr<Statement_node> Parser::parse_statement(json j){
 }
 
 
+/****************************** Main function *************************/
+
+Function_parameter Parser::parse_parameter (json j){
+  return Function_parameter(j["param"].get<string>(),string_to_type(j["type"].get<string>()));
+}
+
+
+
+Function_ptr Parser::parse_function(json j){
+  vector<Function_parameter> parameters = {};
+  for (json::iterator it = j["parameters"].begin(); it != j["parameters"].end(); ++it) {
+    parameters.push_back(parse_parameter(*it));
+  }
+  
+  Function_ptr function_ret =  Function_ptr(new Function(j["function"].get<string>(),string_to_type(j["type"].get<string>()), parameters));
+  function_ret->set_root(parse_statement(j["statement"]));
+  return function_ret;
+}
+
+
+
+shared_ptr<Function_pool> Parser::parse_file(string file){
+  json j = file_to_json(file);
+  
+  for (json::iterator it = j.begin(); it != j.end(); ++it) {
+    function_pool->add(parse_function(*it));
+  }
+  return function_pool;
+}
+
+
+/****************************** Miscellaneous **************************/
 
 vartype::variable_type Parser::string_to_type(string s){
   if(s=="int")

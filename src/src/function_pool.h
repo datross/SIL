@@ -21,6 +21,9 @@ public:
     Function_ptr add(std::string name, 
                      vartype::variable_type return_type, 
                      std::vector<Function_parameter> parameters);
+
+    /* Adds a function to the pool */
+    void add(Function_ptr);
     
     /* Returns a shared_ptr on the function with the given name. */
     Function_ptr get(std::string name);

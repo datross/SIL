@@ -41,7 +41,7 @@ public:
 			 std::vector<Function_parameter> _parameters);
 	void set_root(Statement_ptr _root);
         const std::vector<Function_parameter>& get_parameters() const;
-        
+        std::string get_name() const;
 	void execute();
 	Variable_ptr get_return_value();
 };

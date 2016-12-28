@@ -25,10 +25,14 @@ namespace sil{
     
     Parser();
     
-    //Reads a file and converse it into a json object
-    json file_to_json(std::string);
+    
 
-    std::shared_ptr<sil::function::Float_node> parse_float(json);
+   
+
+    std::shared_ptr<sil::function::Function_pool> parse_file(std::string);
+    
+  private :
+     std::shared_ptr<sil::function::Float_node> parse_float(json);
     std::shared_ptr<sil::function::Int_node> parse_int(json);
     std::shared_ptr<sil::function::String_node> parse_string(json);
     std::shared_ptr<sil::function::Read_node> parse_read(json);
@@ -40,12 +44,17 @@ namespace sil{
     std::shared_ptr<sil::function::Return_node> parse_return(json);
     std::shared_ptr<sil::function::Call_node> parse_call(json);
     std::shared_ptr<sil::function::Statement_node> parse_statement(json);
+
+    sil::function::Function_parameter parse_parameter (json);
+    sil::function::Function_ptr parse_function(json);
     
-  private :
-    //transforme une chaîne du type "int" en type
+    //transforms a string looking like "int" to parstype::type
     vartype::variable_type string_to_type(std::string);
+    //Reads a file and converse it into a json object
+    json file_to_json(std::string);
+    
     sil::function::Node_pool pool;
-    sil::function::Function_pool function_pool;
+    std::shared_ptr<sil::function::Function_pool> function_pool;
   
   };
 
