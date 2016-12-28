@@ -271,3 +271,51 @@ void Binary_math_node::execute() {
     }
 }
 
+/* ------------------------------------------------------------------------- */
+
+While_node::While_node() {
+}
+
+void While_node::set_condition_child(Expression_ptr child) {
+    condition = child;
+}
+
+void While_node::set_loop_child(Statement_ptr child) {
+    loop = child;
+}
+
+void While_node::execute() {
+    while(true) {
+        condition->execute();
+        
+        if(condition->get_return_value()->to_Int()->get_val() != 0)
+            break;
+        
+        loop->execute();
+    }
+}
+
+/* ------------------------------------------------------------------------- */
+
+If_else_node::If_else_node() {
+}
+
+void If_else_node::set_condition_child(Expression_ptr child) {
+    condition = child;
+}
+
+void If_else_node::set_statement_if(Statement_ptr child) {
+    statement_if = child;
+}
+
+void If_else_node::set_statement_else(Statement_ptr child) {
+    statement_else = child;
+}
+
+void If_else_node::execute() {
+    condition->execute();
+    if(condition->get_return_value()->to_Int()->get_val() != 0)
+        statement_if->execute();
+    else
+        statement_else->execute();
+}

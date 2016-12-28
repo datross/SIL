@@ -23,7 +23,6 @@ public:
 	void operator=(const Int&);
 	virtual Int * clone();
 	
-	/* debug */
 	int get_val() { return *(int*)value; }
 };
 

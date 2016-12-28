@@ -1,1 +1,15 @@
-{"write" : "x", "expr" : {"int" : 3}}
+[
+{
+    "function" : "main", 
+    "type" : "int", 
+    "parameters" : [],
+    "statement" : {
+        "block" : [
+                { "allocate" : {"name":"chaine", "type":"string"} },
+                { "write" : "chaine", "expr" : {"string":"Hello world!\n"}},
+                { "call" : "print", "args" : [ { "read" : "chaine" } ]},
+                { "return" : { "int" : 0 } }
+        ]
+    }
+}
+]

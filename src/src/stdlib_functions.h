@@ -26,8 +26,14 @@ private:
 public:    
     /**** stdlib functions ****/
     
-    /* 'print' */
+    /* 'int print(value : NOTYPE)' */
     static function::Function_ptr print;
+    
+    /* 'type input(str_type: string)' with 'type' either int, float or string. */
+    static function::Function_ptr input;
+    
+    /* 'type random(str_type : string, inf : NOTYPE, sup : NOTYPE)' */
+    static function::Function_ptr random;
 };
     
 }

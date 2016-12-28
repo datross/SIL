@@ -3,11 +3,15 @@
 
 #include <string>
 #include <sstream>
+#include <ostream>
+#include <iostream>
 
 /* Gathering of general useful functions. */
 class Utilities {
 private:
-    Utilities(){}
+    Utilities();
+    
+    static std::ostream dummy;
 public:
     /* works with stringstream, so one type must be a string. */
     template<class dst, class src>
@@ -18,6 +22,17 @@ public:
         ss >> d;
         return d;
     }
+    
+    /* stream to work with */
+    static std::ostream * logging_stream_ptr;
+    
+    /* obvious */
+    static void toggle_verbose_stream(bool verbose) {
+        if(verbose) logging_stream_ptr = &std::cout;
+        else logging_stream_ptr = &dummy;    
+    }
 };
+
+#define log_stream *Utilities::logging_stream_ptr
 
 #endif

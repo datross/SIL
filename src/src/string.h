@@ -25,8 +25,6 @@ public:
 	void operator=(const String&);
 	virtual String * clone();
 
-
-	/* debug */
 	std::string get_val() { return *(std::string*)value; }
 };
 

@@ -152,6 +152,35 @@ public:
     virtual void execute();
 };
 
+/* ------------------------------------------------------------------------- */
+
+class While_node : public Statement_node {
+private:
+    Expression_ptr condition;
+    Statement_ptr loop;
+public:
+    While_node();
+    void set_condition_child(Expression_ptr);
+    void set_loop_child(Statement_ptr);
+    
+    virtual void execute();
+};
+
+/* ------------------------------------------------------------------------- */
+
+class If_else_node : public Statement_node {
+private:
+    Expression_ptr condition;
+    Statement_ptr statement_if, statement_else;
+public:
+    If_else_node();
+    void set_condition_child(Expression_ptr);
+    void set_statement_if(Statement_ptr);
+    void set_statement_else(Statement_ptr);
+    
+    virtual void execute();
+};
+
 }
 }
 
