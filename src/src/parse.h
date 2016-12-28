@@ -17,7 +17,9 @@
 using json = nlohmann::json;
 
 namespace sil{
-    
+
+/* This class load a file, parses it , and returns the function pool
+ * associated, in order to run the main manually. */
 class Parser {
 public :
     Parser();
@@ -48,14 +50,12 @@ private :
     /* transforms a string looking like ">" to binary_operation_type */
     sil::function::binary_operation_type string_to_binary_type(std::string);
     
-    /* Reads a file and converse it into a json object */
+    /* Reads a file and parses it into a json object */
     json file_to_json(std::string);
     
     sil::function::Node_pool pool;
     std::shared_ptr<sil::function::Function_pool> function_pool;
 };
-    
-    
     
 }
 #endif

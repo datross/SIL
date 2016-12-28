@@ -33,6 +33,7 @@ public:
     }
 };
 
+/* alias to use to prints log info. */
 #define log_stream *Utilities::logging_stream_ptr
 
 #endif

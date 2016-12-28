@@ -8,7 +8,8 @@
 
 namespace sil {
 namespace function {
-    
+
+/* Container to store functions and acces them by their name. */
 class Function_pool {
 private:
     std::map<std::string, Function_ptr> functions;

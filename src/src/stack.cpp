@@ -25,22 +25,21 @@ void Stack::pop() {
 }
 
 Variable_ptr& Stack::operator[](const std::string name) {
-	try {
-		try { 
-			return data[data.size() - 1].at(name); 
-		} catch(const std::out_of_range& e) { 
-			try {
-				return data[0].at(name);
-			} catch(const std::out_of_range& e) {
-				throw;
-			}
-		}
-	} catch(const std::out_of_range& e) {
-		throw error::undeclared_variable(name);
-	}
+    try {
+            try { 
+                    return data[data.size() - 1].at(name); 
+            } catch(const std::out_of_range& e) { 
+                    try {
+                            return data[0].at(name);
+                    } catch(const std::out_of_range& e) {
+                            throw;
+                    }
+            }
+    } catch(const std::out_of_range& e) {
+            throw error::undeclared_variable(name);
+    }
 }
 
 void Stack::create_variable(std::string name, Variable_ptr value) {
-	std::pair<std::map<std::string, Variable_ptr>::iterator, bool> element = data[data.size() - 1].insert(std::make_pair(name, value));
-	/* eventual debugging info given to user, if variable already exists (element.second == true) */
+    data[data.size() - 1].insert(std::make_pair(name, value));
 }

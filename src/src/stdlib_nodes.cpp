@@ -16,7 +16,6 @@ void Output_node::set_child(Expression_ptr _child) {
 
 void Output_node::execute() {
     child->execute();
-    // TODO je crois bien qu'on est obligé de mettre un embranchement...
     if(child->get_return_value()->get_type() == vartype::INT) {
         std::cout << ((Int*)(child->get_return_value().get()))->get_val();
     } else if(child->get_return_value()->get_type() == vartype::FLOAT) {
@@ -47,8 +46,6 @@ void Input_node::execute() {
         return_value = Variable_ptr(new Float( Utilities::convert<float, std::string>(line)));
     } else if(type->get_return_value()->to_String()->get_val() == "string") {
         return_value = Variable_ptr(new String( line ));
-    } else {
-        // TODO throw exception
     }
 }
 
@@ -81,7 +78,5 @@ void Random_node::execute() {
     } else if(type->get_return_value()->to_String()->get_val() == "float") {
         std::uniform_real_distribution<float>distribution(inf->get_return_value()->to_Float()->get_val(), sup->get_return_value()->to_Float()->get_val());
         return_value = Variable_ptr ( new Float( distribution(generator) ) );
-    } else {
-        // TODO throw exception
     }
 }

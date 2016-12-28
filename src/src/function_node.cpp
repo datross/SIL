@@ -214,7 +214,7 @@ void Binary_math_node::execute() {
             } 
             /* String - other */
             else {
-                // TODO throw exception
+                std::cerr << "SIL Error: cannot add string with an other type." << std::endl;
             }
         }
         
@@ -244,7 +244,7 @@ void Binary_math_node::execute() {
         /* String - whatever */
         if(left_child->get_return_value()->get_type()  == vartype::STRING || 
            right_child->get_return_value()->get_type() == vartype::STRING) {
-            // TODO throw exception
+            std::cerr << "SIL Error: cannot multiply string with any type." << std::endl;
         }
         
         /* Int - Int */
@@ -273,7 +273,7 @@ void Binary_math_node::execute() {
         /* String - whatever */
         if(left_child->get_return_value()->get_type()  == vartype::STRING || 
            right_child->get_return_value()->get_type() == vartype::STRING) {
-            // TODO throw exception
+            std::cerr << "SIL Error: cannot compare (greater) string with any type." << std::endl;
         }
         
         /* Float - Int ou Float - Float ou Int - Int */

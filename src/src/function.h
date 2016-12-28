@@ -24,7 +24,7 @@ class Function {
 private:
 	/* id of the function */
 	std::string name;
-	/* TODO necessary? */
+	/* return type of the function */
 	const vartype::variable_type return_type;
 	/* specifies what are the parameters */
 	std::vector<Function_parameter> parameters;

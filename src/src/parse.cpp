@@ -12,6 +12,7 @@
 #include "function_pool.h"
 #include "parse.h"
 #include "utilities.h"
+#include "errors.h"
 
 #include "json.hpp"
 
@@ -23,7 +24,7 @@ using json = nlohmann::json;
 
 Parser::Parser() 
     : function_pool(new Function_pool()) {
-    /* On ajout la librairie standard dans les fonctions. */
+    /* Adds standard library functions to the pool. */
     function_pool->add(sil_std::Stdlib_functions::print);
     function_pool->add(sil_std::Stdlib_functions::input);
     function_pool->add(sil_std::Stdlib_functions::random);
@@ -31,19 +32,19 @@ Parser::Parser()
 
 json Parser::file_to_json(string name_file) {
     ifstream file(name_file, ios::in);
-    if(file)  
+    if(!file)  
     {
-        string string_file = "";
-        string line;
-        while (getline(file,line)){
-            string_file += line;
-        }
-        file.close();
-        
-        return json::parse(string_file);
-    } else {
-        cerr << "The file required is missing : " << name_file << endl;
+        throw error::file_error(name_file);
     }
+   
+    string string_file = "";
+    string line;
+    while (getline(file,line)){
+        string_file += line;
+    }
+    file.close();
+    
+    return json::parse(string_file);
 }
 
 
@@ -104,8 +105,10 @@ std::shared_ptr<Expression_node> Parser::parse_expression(json j) {
         return parse_call(j);
     else if(j.find("binary") != j.end())
         return parse_binary(j);
-    else
-        cerr << "parser error : this is not the name of an expression"<< endl;
+    else {
+        cerr << "SIL Parser error : this is not the name of an expression"<< endl;
+        return NULL;
+    }
     
 }
 
@@ -198,21 +201,23 @@ std::shared_ptr<Statement_node> Parser::parse_statement(json j) {
         return parse_while(j);
     else if(j.find("if") != j.end())
         return parse_if_else(j);
-    else
-        cerr << "parser error : this is not the name of a statement"<< endl;    
+    else {
+        cerr << "SIL Parser error : this is not the name of a statement"<< endl;
+        return NULL;
+    }
 }
 
 
 /****************************** Main function *************************/
 
 Function_parameter Parser::parse_parameter (json j) {
-    return Function_parameter(j["param"].get<string>(),string_to_type(j["type"].get<string>()));
+    return Function_parameter(j["param"].get<string>(), string_to_type(j["type"].get<string>()));
 }
 
 
 
 Function_ptr Parser::parse_function(json j) {
-            log_stream << "  > Function : ";
+    log_stream << "  > Function : ";
     
     vector<Function_parameter> parameters = {};
     for (json::iterator it = j["parameters"].begin(); it != j["parameters"].end(); ++it) {
@@ -221,7 +226,9 @@ Function_ptr Parser::parse_function(json j) {
     auto function_ret = function_pool->add(
         j["function"].get<string>(), string_to_type(j["type"].get<string>()), 
         parameters);
-            log_stream << function_ret->get_name() << std::endl;
+    
+    log_stream << function_ret->get_name() << std::endl;
+    
     function_ret->set_root(parse_statement(j["statement"]));
     return function_ret;
 }
@@ -253,8 +260,10 @@ vartype::variable_type Parser::string_to_type(string s) {
         return vartype::STRING;
     else if( s== "notype")
         return vartype::NOTYPE;
-    else
-        cerr<< "Parser error : the type " << s << " does not exist." <<endl;
+    else {
+        cerr<< "SIL Parser error : the type " << s << " does not exist." <<endl;
+        return vartype::NOTYPE;
+    }
 }
 
 binary_operation_type Parser::string_to_binary_type(string s) {
@@ -266,6 +275,9 @@ binary_operation_type Parser::string_to_binary_type(string s) {
         return GREATER;
     else if(s == "==")
         return EQUAL;
-    else
-        cerr<< "Parser error : the binary operation " << s << " does not exist." <<endl;
+    else {
+        cerr<< "SIL Parser error : the binary operation " << s << " does not exist." <<endl;
+        /* Yes it's dangerous... */
+        return ADDITION;
+    }
 }

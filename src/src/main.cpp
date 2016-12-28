@@ -10,6 +10,7 @@
 #include "node_pool.h"
 #include "parse.h"
 #include "utilities.h"
+#include "errors.h"
 
 #include "json.hpp"
 
@@ -24,6 +25,7 @@ int main(int argc, char * argv[])
     if(argc < 2) {
         std::cerr << "SIL - No input file." << std::endl;
         std::cerr << "Syntax : 'sil [--verbose|-v] input_file'" << std::endl;
+        exit(EXIT_FAILURE);
     }
     
     /* Check if it is verbose */
@@ -37,7 +39,13 @@ int main(int argc, char * argv[])
     if(argc > 3) argc = 3;
     
     Parser parser;
-    auto program = parser.parse_file(std::string(argv[argc - 1]));
+    std::shared_ptr<sil::function::Function_pool> program;
+    try {
+        program = parser.parse_file(std::string(argv[argc - 1]));
+    } catch(error::file_error& e) {
+        std::cerr << e.what() << std::endl;
+        exit(EXIT_FAILURE);
+    }
     auto function_main = program->get("main");
     /* If main() exists in the code. */
     if(function_main) {

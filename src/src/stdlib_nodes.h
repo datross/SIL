@@ -15,7 +15,7 @@
 namespace sil {
 namespace sil_std {
 
-// TODO pour l'instant en console, après peut-être dans un fichier ?
+/* Prints on standard output. */
 class Output_node : public function::Statement_node {
 private:
     function::Expression_ptr child;
@@ -27,7 +27,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
-/* Read from standard input */
+/* Reads from standard input */
 class Input_node : public function::Expression_node {
 private:
     function::Expression_ptr type;
@@ -39,7 +39,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
-/* Generate random number */
+/* Generates random number (NOTE: is does not generate string) */
 class Random_node : public function::Expression_node {
 private:
     function::Expression_ptr inf, sup, type;

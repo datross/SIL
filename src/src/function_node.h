@@ -10,11 +10,12 @@
 #include <iostream>
 
 namespace sil {
-
 namespace function {
-    
+
+/* Useful for Node_pool. */
 class Node {};
 
+/* General Expression node */
 class Expression_node : virtual public Node {
 protected:
 	Variable_ptr return_value;
@@ -26,6 +27,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
+/* General Statement node. */
 class Statement_node : virtual public Node {
 private:
 public:
@@ -35,6 +37,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
+/* Call an other Function. */
 class Call_node : public Statement_node, public Expression_node {
 private:
 	Function_ptr function;
@@ -47,6 +50,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
+/* Can execute several statements one by one. */
 class Block_node : public Statement_node {
 private:
 	std::vector<Statement_ptr> children;
@@ -57,11 +61,11 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
+/* Sets the return value of a Function. */
 class Return_node : public Statement_node {
 private:
 	Function_ptr function;
 
-	/* children */
 	Expression_ptr child;
 public:
 	Return_node(Function_ptr _function, Expression_ptr _child);
@@ -70,6 +74,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
+/* Creates Int variable. */
 class Int_node : public Expression_node {
 public:
 	Int_node();
@@ -78,6 +83,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
+/* Creates Float variable. */
 class Float_node : public Expression_node {
 public:
 	Float_node();
@@ -86,6 +92,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
+/* Creates String variable. */
 class String_node : public Expression_node {
 public:
 	String_node();
@@ -94,7 +101,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
-/* This node read a variable from the stack */
+/* This node reads a variable from the stack */
 class Read_node : public Expression_node {
 private:
     std::string variable_identifier;
@@ -158,6 +165,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
+/* Classic while. */
 class While_node : public Statement_node {
 private:
     Expression_ptr condition;
@@ -172,6 +180,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
+/* Classic if/else. */
 class If_else_node : public Statement_node {
 private:
     Expression_ptr condition;

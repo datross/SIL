@@ -19,6 +19,7 @@ class Int;
 class Float;
 class String;
 
+/* Base class for every variables */
 class Variable {
 protected:
     void* value;

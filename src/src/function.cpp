@@ -29,9 +29,8 @@ const std::vector<Function_parameter>& Function::get_parameters() const {
 void Function::execute() {
     root->execute();
 }
-#include <iostream>
+
 Variable_ptr Function::get_return_value() {
-//     std::cout << return_value << std::endl;
     return return_value;
 }
 
