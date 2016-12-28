@@ -16,7 +16,7 @@ Stack& Stack::get_instance() {
 }
 
 void Stack::push() {
-    std::map<std::string, Variable> scope;
+    std::map<std::string, Variable_ptr> scope;
     data.push_back(scope);
 }
 
@@ -24,7 +24,7 @@ void Stack::pop() {
     data.pop_back();
 }
 
-Variable& Stack::operator[](const std::string name) {
+Variable_ptr& Stack::operator[](const std::string name) {
 	try {
 		try { 
 			return data[data.size() - 1].at(name); 
@@ -40,8 +40,7 @@ Variable& Stack::operator[](const std::string name) {
 	}
 }
 
-#include <iostream>
 void Stack::create_variable(std::string name, Variable_ptr value) {
-	std::pair<std::map<std::string, Variable>::iterator, bool> element = data[data.size() - 1].insert(std::make_pair(name, *value));
+	std::pair<std::map<std::string, Variable_ptr>::iterator, bool> element = data[data.size() - 1].insert(std::make_pair(name, value));
 	/* eventual debugging info given to user, if variable already exists (element.second == true) */
 }
