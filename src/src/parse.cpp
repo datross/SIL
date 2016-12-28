@@ -114,7 +114,19 @@ std::shared_ptr<Block_node> Parser::parse_block(json j){
 
 
 std::shared_ptr<Return_node> Parser::parse_return(json j){
-  //  return pool.add<Return_node>(parse_expression(j["return"]));
+  return pool.add<Return_node>(function_pool.get_last(),parse_expression(j["return"]));
+}
+
+
+std::shared_ptr<Call_node> Parser::parse_call(json j){
+  auto call_ret = pool.add<Call_node>(function_pool.get(j["name"].get<string>()));
+  vector<Expression_ptr> children = {};
+  for (json::iterator it = j["args"].begin(); it != j["args"].end(); ++it) {
+    children.push_back(parse_expression(*it));
+  }
+  call_ret->set_children(children);
+  return call_ret;
+  
 }
 
 std::shared_ptr<Statement_node> Parser::parse_statement(json j){

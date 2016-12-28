@@ -38,6 +38,7 @@ namespace sil{
     std::shared_ptr<sil::function::Allocate_node> parse_allocate(json);
     std::shared_ptr<sil::function::Block_node> parse_block(json);
     std::shared_ptr<sil::function::Return_node> parse_return(json);
+    std::shared_ptr<sil::function::Call_node> parse_call(json);
     std::shared_ptr<sil::function::Statement_node> parse_statement(json);
     
   private :
