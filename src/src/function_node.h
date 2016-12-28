@@ -12,8 +12,10 @@
 namespace sil {
 
 namespace function {
+    
+class Node {};
 
-class Expression_node {
+class Expression_node : virtual public Node {
 protected:
 	Variable_ptr return_value;
 public:
@@ -24,7 +26,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
-class Statement_node {
+class Statement_node : virtual public Node {
 private:
 public:
 	Statement_node();
@@ -33,7 +35,7 @@ public:
 
 /* ------------------------------------------------------------------------- */
 
-class Call_node : public Statement_node, Expression_node {
+class Call_node : public Statement_node, public Expression_node {
 private:
 	Function_ptr function;
         std::vector<Expression_ptr> children;

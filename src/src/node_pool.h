@@ -15,11 +15,9 @@ namespace function {
     
 class Node_pool {
 private:
-    std::list<Statement_ptr> statements;
-    std::list<Expression_ptr> expressions;
+    std::list<Node_ptr> nodes;
     
-    void push(Expression_ptr);
-    void push(Statement_ptr);
+    void push(Node_ptr);
 public:
     Node_pool();
     ~Node_pool();

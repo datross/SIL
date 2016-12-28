@@ -9,10 +9,6 @@ Node_pool::Node_pool() {
 Node_pool::~Node_pool() {
 }
 
-void Node_pool::push(Expression_ptr p) {
-    expressions.push_front(p);
-}
-
-void Node_pool::push(Statement_ptr p) {
-    statements.push_front(p);
+void Node_pool::push(Node_ptr p) {
+    nodes.push_front(p);
 }

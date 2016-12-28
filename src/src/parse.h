@@ -34,6 +34,8 @@ private :
     std::shared_ptr<sil::function::Block_node> parse_block(json);
     std::shared_ptr<sil::function::Return_node> parse_return(json);
     std::shared_ptr<sil::function::Call_node> parse_call(json);
+    std::shared_ptr<sil::function::While_node> parse_while(json);
+    std::shared_ptr<sil::function::If_else_node> parse_if_else(json);
     std::shared_ptr<sil::function::Statement_node> parse_statement(json);
     
     sil::function::Function_parameter parse_parameter (json);

@@ -80,13 +80,15 @@ std::shared_ptr<Expression_node> Parser::parse_expression(json j) {
     log_stream << "Parsing expression : ";
     
     if(j.find("int") != j.end())
-        return this->parse_int(j);
+        return parse_int(j);
     else if(j.find("string") != j.end())
-        return this->parse_string(j);
+        return parse_string(j);
     else if(j.find("float") != j.end())
-        return this->parse_float(j);
+        return parse_float(j);
     else if(j.find("read") != j.end())
-        return this->parse_read(j);
+        return parse_read(j);
+    else if(j.find("call") != j.end())
+        return parse_call(j);
     else
         cerr << "parser error : this is not the name of an expression"<< endl;
     
@@ -142,19 +144,41 @@ std::shared_ptr<Call_node> Parser::parse_call(json j) {
     return call_ret;
 }
 
+std::shared_ptr<While_node> Parser::parse_while(json j) {
+    log_stream << "while" << std::endl;
+    
+    auto while_node = pool.add<While_node>();
+    while_node->set_condition_child(parse_expression(j["cond"]));
+    while_node->set_loop_child(parse_statement(j["loop"]));
+    
+    return while_node;
+}
+
+std::shared_ptr<If_else_node> Parser::parse_if_else(json j) {
+    log_stream << "if/else" << std::endl;
+    
+    auto if_else_node = pool.add<If_else_node>();
+    if_else_node->set_condition_child(parse_expression(j["cond"]));
+    if_else_node->set_statement_if(parse_statement(j["then"]));
+    if(j.find("else") != j.end())
+        if_else_node->set_statement_else(parse_statement(j["else"]));
+    
+    return if_else_node;
+}
+
 std::shared_ptr<Statement_node> Parser::parse_statement(json j) {
     log_stream << "Parsing statement : ";
     
     if(j.find("allocate") != j.end())
-        return this->parse_allocate(j);
+        return parse_allocate(j);
     else if(j.find("write") != j.end())
-        return this->parse_write(j);
+        return parse_write(j);
     else if(j.find("block") != j.end())
-        return this->parse_block(j);
+        return parse_block(j);
     else if(j.find("return") != j.end())
-        return this->parse_return(j);
+        return parse_return(j);
     else if(j.find("call") != j.end())
-        return this->parse_call(j);
+        return parse_call(j);
     else
         cerr << "parser error : this is not the name of a statement"<< endl;    
 }
