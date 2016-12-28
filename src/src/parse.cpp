@@ -106,7 +106,7 @@ std::shared_ptr<Write_node> Parser::parse_write(json j){
 
 std::shared_ptr<Block_node> Parser::parse_block(json j){
   vector<Statement_ptr> children = {};
-  for (json::iterator it = j.begin(); it != j.end(); ++it) {
+  for (json::iterator it = j["block"].begin(); it != j["block"].end(); ++it) {
     children.push_back(parse_statement(*it));
   }
   return pool.add<Block_node>(children);
