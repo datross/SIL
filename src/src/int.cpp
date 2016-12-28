@@ -1,4 +1,5 @@
 #include "int.h"
+#include "utilities.h"
 
 using namespace sil;
 
@@ -23,7 +24,7 @@ std::shared_ptr<Float> Int::to_Float() const {
     return std::shared_ptr<Float>(new Float((float)(*(int*)value)));
 }
 std::shared_ptr<String> Int::to_String() const {
-    return std::shared_ptr<String>(new String(/* TODO */));
+    return std::shared_ptr<String>(new String(Utilities::convert<std::string, int>(*(int*)value)));
 }
 
 Int Int::make() {

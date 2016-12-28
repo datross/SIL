@@ -14,9 +14,9 @@ public:
 	virtual ~Int();
         
         /* cast function */
-    virtual std::shared_ptr<Int> to_Int() const;
-    virtual std::shared_ptr<Float> to_Float() const;
-    virtual std::shared_ptr<String> to_String() const;
+        virtual std::shared_ptr<Int> to_Int() const;
+        virtual std::shared_ptr<Float> to_Float() const;
+        virtual std::shared_ptr<String> to_String() const;
         
         static Int make();
 	
